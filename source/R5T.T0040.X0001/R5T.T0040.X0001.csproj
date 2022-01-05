@@ -1,13 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\R5T.D0078\source\R5T.D0078.T0032\R5T.D0078.T0032.csproj" />
     <ProjectReference Include="..\..\..\R5T.Magyar\source\R5T.Magyar\R5T.Magyar.csproj" />
     <ProjectReference Include="..\..\..\R5T.T0021.X0001\source\R5T.T0021.X0001\R5T.T0021.X0001.csproj" />
     <ProjectReference Include="..\..\..\R5T.T0021\source\R5T.T0021.X002\R5T.T0021.X002.csproj" />
     <ProjectReference Include="..\..\..\R5T.T0037\source\R5T.T0037.X001\R5T.T0037.X001.csproj" />
     <ProjectReference Include="..\..\..\R5T.T0037\source\R5T.T0037.X002\R5T.T0037.X002.csproj" />
+    <ProjectReference Include="..\..\..\R5T.T0040\source\R5T.T0040.X001\R5T.T0040.X001.csproj" />
     <ProjectReference Include="..\..\..\R5T.T0040\source\R5T.T0040\R5T.T0040.csproj" />
+    <ProjectReference Include="..\..\..\R5T.T0041\source\R5T.T0041.X001\R5T.T0041.X001.csproj" />
     <ProjectReference Include="..\..\..\R5T.T0041\source\R5T.T0041.X002\R5T.T0041.X002.csproj" />
+    <ProjectReference Include="..\..\..\R5T.T0044\source\R5T.T0044.X001\R5T.T0044.X001.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
