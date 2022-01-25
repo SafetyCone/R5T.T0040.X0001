@@ -34,6 +34,16 @@ namespace System
             return output;
         }
 
+        public static string GetCodeDirectoryFileRelativePath(this IProjectPathsOperator _,
+            string fileRelativePath)
+        {
+            var output = Instances.PathOperator.GetFilePath(
+                _.GetCodeDirectoryRelativePath(),
+                fileRelativePath);
+
+            return output;
+        }
+
         public static string GetCodeDirectoryPath(this IProjectPathsOperator _,
             string projectDirectoryPath)
         {

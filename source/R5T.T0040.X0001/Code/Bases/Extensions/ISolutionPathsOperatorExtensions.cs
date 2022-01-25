@@ -29,6 +29,9 @@ namespace System
             return output;
         }
 
+        /// <summary>
+        /// Gets the path to the source subdirectory of parent directory path.
+        /// </summary>
         public static string GetSourceSolutionDirectoryPath(this ISolutionPathsOperator _,
             string parentDirectoryPath)
         {
@@ -43,11 +46,11 @@ namespace System
             string parentDirectoryPath,
             string solutionName)
         {
-            var solutionDirectoryPath = _.GetSourceSolutionDirectoryPath(parentDirectoryPath);
+            var sourceSolutionDirectoryPath = _.GetSourceSolutionDirectoryPath(parentDirectoryPath);
 
             var solutionFileName = Instances.SolutionFileNameOperator.GetSolutionFileName(solutionName);
 
-            var solutionFilePath = Instances.PathOperator.GetFilePath(solutionDirectoryPath, solutionFileName);
+            var solutionFilePath = Instances.PathOperator.GetFilePath(sourceSolutionDirectoryPath, solutionFileName);
             return solutionFilePath;
         }
 
