@@ -7,33 +7,8 @@ using Instances = R5T.T0040.X0001.Instances;
 
 namespace System
 {
-    public static class IProjectPathsOperatorExtensions
+    public static partial class IProjectPathsOperatorExtensions
     {
-        public static string GetInstancesCodeFileRelativePath(this IProjectPathsOperator _)
-        {
-            var output = Instances.PathOperator.Combine(
-                _.GetCodeDirectoryRelativePath(),
-                Instances.CodeFileName.Instances());
-
-            return output;
-        }
-
-        public static string GetInstancesCodeFilePath(this IProjectPathsOperator _,
-            string projectDirectoryPath)
-        {
-            var output = Instances.PathOperator.GetDirectoryPath(
-                projectDirectoryPath,
-                _.GetInstancesCodeFileRelativePath());
-
-            return output;
-        }
-
-        public static string GetCodeDirectoryRelativePath(this IProjectPathsOperator _)
-        {
-            var output = Instances.CodeDirectoryName.Code();
-            return output;
-        }
-
         public static string GetCodeDirectoryFileRelativePath(this IProjectPathsOperator _,
             string fileRelativePath)
         {
@@ -44,7 +19,7 @@ namespace System
             return output;
         }
 
-        public static string GetCodeDirectoryPath(this IProjectPathsOperator _,
+        public static string GetCodeDirectoryPathFromProjectDirectoryPath(this IProjectPathsOperator _,
             string projectDirectoryPath)
         {
             var output = Instances.PathOperator.GetDirectoryPath(
@@ -54,157 +29,39 @@ namespace System
             return output;
         }
 
+        public static string GetCodeDirectoryPathFromProjectFilePath(this IProjectPathsOperator _,
+            string projectFilePath)
+        {
+            var projectDirectoryPath = _.GetProjectDirectoryPath(projectFilePath);
+
+            var codeDirectoryPath = Instances.PathOperator.GetDirectoryPath(
+                projectDirectoryPath,
+                _.GetCodeDirectoryRelativePath());
+
+            return codeDirectoryPath;
+        }
+
+        /// <summary>
+        /// Chooses <see cref="GetCodeDirectoryPathFromProjectFilePath(IProjectPathsOperator, string)"/> as the default.
+        /// </summary>
+        public static string GetCodeDirectoryPath(this IProjectPathsOperator _,
+            string projectFilePath)
+        {
+            var output = _.GetCodeDirectoryPathFromProjectFilePath(projectFilePath);
+            return output;
+        }
+
+        public static string GetCodeDirectoryRelativePath(this IProjectPathsOperator _)
+        {
+            var output = Instances.CodeDirectoryName.Code();
+            return output;
+        }
+
         public static string GetConstantsDirectoryRelativePath(this IProjectPathsOperator _)
         {
             var output = Instances.PathOperator.Combine(
                 _.GetCodeDirectoryRelativePath(),
                 Instances.CodeDirectoryName.Constants());
-
-            return output;
-        }
-
-        public static string GetStandardProjectPlanFileRelativePath(this IProjectPathsOperator _)
-        {
-            var output = Instances.FileName.ProjectPlan();
-            return output;
-        }
-
-        public static string GetStandardDocumentationFileRelativePath(this IProjectPathsOperator _)
-        {
-            var output = Instances.PathOperator.Combine(
-                _.GetCodeDirectoryRelativePath(),
-                Instances.CodeFileName.Documentation());
-
-            return output;
-        }
-
-        public static string GetStandardDocumentationFilePath(this IProjectPathsOperator _,
-            string projectDirectoryPath)
-        {
-            var output = Instances.PathOperator.GetFilePath(
-                projectDirectoryPath,
-                _.GetStandardDocumentationFileRelativePath());
-
-            return output;
-        }
-
-        public static string GetStandardProgramFileRelativePath(this IProjectPathsOperator _)
-        {
-            var output = Instances.PathOperator.Combine(
-                _.GetCodeDirectoryRelativePath(),
-                Instances.CodeFileName.Program());
-
-            return output;
-        }
-
-        public static string GetStandardProgramFilePath(this IProjectPathsOperator _,
-            string projectDirectoryPath)
-        {
-            var output = Instances.PathOperator.GetFilePath(
-                projectDirectoryPath,
-                _.GetStandardProgramFileRelativePath());
-
-            return output;
-        }
-
-        public static string GetServicesDirectoryRelativePath(this IProjectPathsOperator _)
-        {
-            var output = Instances.PathOperator.Combine(
-                _.GetCodeDirectoryRelativePath(),
-                Instances.CodeDirectoryName.Services());
-
-            return output;
-        }
-
-        public static string GetServicesInterfacesDirectoryRelativePath(this IProjectPathsOperator _)
-        {
-            var servicesDirectoryRelativePath = _.GetServicesDirectoryRelativePath();
-
-            var servicesInterfacesDirectoryPath = Instances.PathOperator.GetDirectoryPath(
-                servicesDirectoryRelativePath,
-                Instances.CodeDirectoryName.Interfaces());
-
-            return servicesInterfacesDirectoryPath;
-        }
-
-        public static string GetServicesInterfacesDirectoryPath(this IProjectPathsOperator _,
-            string projectDirectoryPath)
-        {
-            var servicesInterfacesDirectoryRelativePath = _.GetServicesInterfacesDirectoryRelativePath();
-
-            var output = Instances.PathOperator.Combine(
-                projectDirectoryPath,
-                servicesInterfacesDirectoryRelativePath);
-
-            return output;
-        }
-
-        public static string GetServiceClassesDirectoryRelativePath(this IProjectPathsOperator _)
-        {
-            var output = Instances.PathOperator.Combine(
-                _.GetServicesDirectoryRelativePath(),
-                Instances.CodeDirectoryName.Classes());
-
-            return output;
-        }
-
-        public static string GetServiceClassesDirectoryPath(this IProjectPathsOperator _,
-            string projectDirectoryPath)
-        {
-            var serviceClassesDirectoryRelativePath = _.GetServiceClassesDirectoryRelativePath();
-
-            var output = Instances.PathOperator.Combine(
-                projectDirectoryPath,
-                serviceClassesDirectoryRelativePath);
-
-            return output;
-        }
-
-        public static string GetServiceDefinitionsDirectoryRelativePath(this IProjectPathsOperator _)
-        {
-            var output = Instances.PathOperator.Combine(
-                _.GetServicesDirectoryRelativePath(),
-                Instances.CodeDirectoryName.Definitions());
-
-            return output;
-        }
-
-        public static string GetServiceDefinitionsDirectoryPath(this IProjectPathsOperator _,
-            string projectDirectoyPath)
-        {
-            var serviceDefinitionsDirectoryRelativePath = _.GetServiceDefinitionsDirectoryRelativePath();
-
-            var output = Instances.PathOperator.Combine(
-                projectDirectoyPath,
-                serviceDefinitionsDirectoryRelativePath);
-
-            return output;
-        }
-
-        public static string GetServiceExtensionsDirectoryRelativePath(this IProjectPathsOperator _)
-        {
-            var output = Instances.PathOperator.Combine(
-                _.GetServicesDirectoryRelativePath(),
-                Instances.CodeDirectoryName.Extensions());
-
-            return output;
-        }
-
-        public static string GetServiceImplementationsDirectoryRelativePath(this IProjectPathsOperator _)
-        {
-            var output = Instances.PathOperator.Combine(
-                _.GetServicesDirectoryRelativePath(),
-                Instances.CodeDirectoryName.Implementations());
-
-            return output;
-        }
-
-        public static string GetServiceImplementationsDirectoryPath(this IProjectPathsOperator _,
-            string projectDirectoryPath)
-        {
-            var output = Instances.PathOperator.Combine(
-                projectDirectoryPath,
-                _.GetServiceImplementationsDirectoryRelativePath());
 
             return output;
         }
@@ -218,46 +75,31 @@ namespace System
             return output;
         }
 
-        public static string GetBasesDirectoryRelativePath(this IProjectPathsOperator _)
+        public static string GetBasesDirectoryPath(this IProjectPathsOperator _,
+            string projectFilePath)
         {
-            var output = Instances.PathOperator.Combine(
-                _.GetCodeDirectoryRelativePath(),
+            var codeDirectoryPath = _.GetCodeDirectoryPathFromProjectFilePath(projectFilePath);
+
+            var basesDirectoryPath = Instances.PathOperator.GetDirectoryPath(
+                codeDirectoryPath,
                 Instances.CodeDirectoryName.Bases());
 
-            return output;
+            return basesDirectoryPath;
         }
 
-        public static string GetBasesExtensionsDirectoryRelativePath(this IProjectPathsOperator _)
+        public static string GetBasesInterfacesDirectoryPathFromProjectFilePath(this IProjectPathsOperator _,
+            string projectFilePath)
         {
-            var output = Instances.PathOperator.Combine(
-                _.GetBasesDirectoryRelativePath(),
-                Instances.CodeDirectoryName.Extensions());
+            var basesDirectoryPath = _.GetBasesDirectoryPath(projectFilePath);
 
-            return output;
-        }
-
-        public static string GetBasesExtensionsDirectoryPath(this IProjectPathsOperator _,
-            string projectDiretoryPath)
-        {
-            var basesExtensionsDirectoryRelativePath = _.GetBasesExtensionsDirectoryRelativePath();
-
-            var output = Instances.PathOperator.Combine(
-                projectDiretoryPath,
-                basesExtensionsDirectoryRelativePath);
-
-            return output;
-        }
-
-        public static string GetBasesInterfacesDirectoryRelativePath(this IProjectPathsOperator _)
-        {
-            var output = Instances.PathOperator.Combine(
-                _.GetBasesDirectoryRelativePath(),
+            var basesInterfacesDirectoryPath = Instances.PathOperator.GetDirectoryPath(
+                basesDirectoryPath,
                 Instances.CodeDirectoryName.Interfaces());
 
-            return output;
+            return basesInterfacesDirectoryPath;
         }
 
-        public static string GetBasesInterfacesDirectoryPath(this IProjectPathsOperator _,
+        public static string GetBasesInterfacesDirectoryPathFromProjectDirectoryPath(this IProjectPathsOperator _,
             string projectDirectoryPath)
         {
             var basesInterfacesDirectoryRelativePath = _.GetBasesInterfacesDirectoryRelativePath();
@@ -269,25 +111,26 @@ namespace System
             return output;
         }
 
-        public static string GetBasesClassesDirectoryRelativePath(this IProjectPathsOperator _)
+        /// <summary>
+        /// Defines <see cref="GetBasesInterfacesDirectoryPathFromProjectFilePath(IProjectPathsOperator, string)"/> as the default.
+        /// </summary>
+        public static string GetBasesInterfacesDirectoryPath(this IProjectPathsOperator _,
+            string projectFilePath)
         {
-            var output = Instances.PathOperator.Combine(
-                _.GetBasesDirectoryRelativePath(),
-                Instances.CodeDirectoryName.Classes());
-
+            var output = _.GetBasesInterfacesDirectoryPathFromProjectFilePath(projectFilePath);
             return output;
         }
 
-        public static string GetBasesClassesDirectoryPath(this IProjectPathsOperator _,
-            string projectDirectoryPath)
+        public static string GetInterfacesDirectoryPath(this IProjectPathsOperator _,
+            string projectFilePath)
         {
-            var basesClassesDirectoryRelativePath = _.GetBasesClassesDirectoryRelativePath();
+            var codeDirectoryPath = _.GetCodeDirectoryPathFromProjectFilePath(projectFilePath);
 
-            var output = Instances.PathOperator.Combine(
-                projectDirectoryPath,
-                basesClassesDirectoryRelativePath);
+            var interfacesDirectoryPath = Instances.PathOperator.GetDirectoryPath(
+                codeDirectoryPath,
+                Instances.CodeDirectoryName.Interfaces());
 
-            return output;
+            return interfacesDirectoryPath;
         }
     }
 }
