@@ -85,7 +85,7 @@ namespace System
             return output;
         }
 
-        public static string GetServiceClassesDirectoryRelativePath(this IProjectPathsOperator _)
+        public static string GetServicesClassesDirectoryRelativePath(this IProjectPathsOperator _)
         {
             var output = Instances.PathOperator.Combine(
                 _.GetServicesDirectoryRelativePath(),
@@ -94,10 +94,10 @@ namespace System
             return output;
         }
 
-        public static string GetServiceClassesDirectoryPath(this IProjectPathsOperator _,
+        public static string GetServicesClassesDirectoryPath(this IProjectPathsOperator _,
             string projectDirectoryPath)
         {
-            var serviceClassesDirectoryRelativePath = _.GetServiceClassesDirectoryRelativePath();
+            var serviceClassesDirectoryRelativePath = _.GetServicesClassesDirectoryRelativePath();
 
             var output = Instances.PathOperator.Combine(
                 projectDirectoryPath,
@@ -106,7 +106,7 @@ namespace System
             return output;
         }
 
-        public static string GetServiceDefinitionsDirectoryRelativePath(this IProjectPathsOperator _)
+        public static string GetServicesDefinitionsDirectoryRelativePath(this IProjectPathsOperator _)
         {
             var output = Instances.PathOperator.Combine(
                 _.GetServicesDirectoryRelativePath(),
@@ -115,14 +115,14 @@ namespace System
             return output;
         }
 
-        public static string GetServiceDefinitionsDirectoryPath(this IProjectPathsOperator _,
-            string projectDirectoyPath)
+        public static string GetServicesDefinitionsDirectoryPath(this IProjectPathsOperator _,
+            string projectDirectoryPath)
         {
-            var serviceDefinitionsDirectoryRelativePath = _.GetServiceDefinitionsDirectoryRelativePath();
+            var servicesDefinitionsDirectoryRelativePath = _.GetServicesDefinitionsDirectoryRelativePath();
 
             var output = Instances.PathOperator.Combine(
-                projectDirectoyPath,
-                serviceDefinitionsDirectoryRelativePath);
+                projectDirectoryPath,
+                servicesDefinitionsDirectoryRelativePath);
 
             return output;
         }
@@ -136,7 +136,7 @@ namespace System
             return output;
         }
 
-        public static string GetServiceImplementationsDirectoryRelativePath(this IProjectPathsOperator _)
+        public static string GetServicesImplementationsDirectoryRelativePath(this IProjectPathsOperator _)
         {
             var output = Instances.PathOperator.Combine(
                 _.GetServicesDirectoryRelativePath(),
@@ -145,12 +145,12 @@ namespace System
             return output;
         }
 
-        public static string GetServiceImplementationsDirectoryPath(this IProjectPathsOperator _,
+        public static string GetServicesImplementationsDirectoryPath(this IProjectPathsOperator _,
             string projectDirectoryPath)
         {
             var output = Instances.PathOperator.Combine(
                 projectDirectoryPath,
-                _.GetServiceImplementationsDirectoryRelativePath());
+                _.GetServicesImplementationsDirectoryRelativePath());
 
             return output;
         }
