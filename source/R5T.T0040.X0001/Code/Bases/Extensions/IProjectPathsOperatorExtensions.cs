@@ -75,6 +75,18 @@ namespace System
             return output;
         }
 
+        public static string GetExtensionsDirectoryPath(this IProjectPathsOperator _,
+            string projectDirectoryPath)
+        {
+            var extensionsDirectoryRelativePath = _.GetExtensionsDirectoryRelativePath();
+
+            var output = Instances.PathOperator.Combine(
+                projectDirectoryPath,
+                extensionsDirectoryRelativePath);
+
+            return output;
+        }
+
         public static string GetBasesDirectoryPath(this IProjectPathsOperator _,
             string projectFilePath)
         {

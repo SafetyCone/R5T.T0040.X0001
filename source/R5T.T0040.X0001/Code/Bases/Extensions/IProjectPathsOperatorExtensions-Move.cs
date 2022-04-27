@@ -174,12 +174,12 @@ namespace System
         }
 
         public static string GetBasesExtensionsDirectoryPath(this IProjectPathsOperator _,
-            string projectDiretoryPath)
+            string projectDirectoryPath)
         {
             var basesExtensionsDirectoryRelativePath = _.GetBasesExtensionsDirectoryRelativePath();
 
             var output = Instances.PathOperator.Combine(
-                projectDiretoryPath,
+                projectDirectoryPath,
                 basesExtensionsDirectoryRelativePath);
 
             return output;
