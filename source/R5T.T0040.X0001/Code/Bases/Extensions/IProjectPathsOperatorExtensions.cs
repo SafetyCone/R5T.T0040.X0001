@@ -75,6 +75,15 @@ namespace System
             return output;
         }
 
+        public static string GetInterfacesDirectoryRelativePath(this IProjectPathsOperator _)
+        {
+            var output = Instances.PathOperator.Combine(
+                _.GetCodeDirectoryRelativePath(),
+                Instances.CodeDirectoryName.Interfaces());
+
+            return output;
+        }
+
         public static string GetExtensionsDirectoryPath(this IProjectPathsOperator _,
             string projectDirectoryPath)
         {
@@ -133,7 +142,7 @@ namespace System
             return output;
         }
 
-        public static string GetInterfacesDirectoryPath(this IProjectPathsOperator _,
+        public static string GetInterfacesDirectoryPath_FromProjectFilePath(this IProjectPathsOperator _,
             string projectFilePath)
         {
             var codeDirectoryPath = _.GetCodeDirectoryPathFromProjectFilePath(projectFilePath);
@@ -141,6 +150,18 @@ namespace System
             var interfacesDirectoryPath = Instances.PathOperator.GetDirectoryPath(
                 codeDirectoryPath,
                 Instances.CodeDirectoryName.Interfaces());
+
+            return interfacesDirectoryPath;
+        }
+
+        public static string GetInterfacesDirectoryPath(this IProjectPathsOperator _,
+            string projectDirectoryPath)
+        {
+            var interfacesDirectoryRelativePath = _.GetInterfacesDirectoryRelativePath();
+
+            var interfacesDirectoryPath = Instances.PathOperator.Combine(
+                projectDirectoryPath,
+                interfacesDirectoryRelativePath);
 
             return interfacesDirectoryPath;
         }

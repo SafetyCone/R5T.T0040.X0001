@@ -9,9 +9,18 @@ namespace System
 {
     public static partial class IProjectPathsOperatorExtensions
     {
-        public static string GetStandardProjectPlanFileRelativePath(this IProjectPathsOperator _)
+        public static string GetProjectPlanFileRelativePath_Standard(this IProjectPathsOperator _)
         {
             var output = Instances.FileName.ProjectPlan();
+            return output;
+        }
+
+        public static string GetProjectPlanFilePath_Standard(this IProjectPathsOperator _,
+            string projectDirectoryPath)
+        {
+            var output = Instances.PathOperator.Combine(
+                projectDirectoryPath,
+                _.GetProjectPlanFileRelativePath_Standard());
             return output;
         }
 
@@ -127,11 +136,21 @@ namespace System
             return output;
         }
 
-        public static string GetServiceExtensionsDirectoryRelativePath(this IProjectPathsOperator _)
+        public static string GetServicesExtensionsDirectoryRelativePath(this IProjectPathsOperator _)
         {
             var output = Instances.PathOperator.Combine(
                 _.GetServicesDirectoryRelativePath(),
                 Instances.CodeDirectoryName.Extensions());
+
+            return output;
+        }
+
+        public static string GetServicesExtensionsDirectoryPath(this IProjectPathsOperator _,
+            string projectDirectoryPath)
+        {
+            var output = Instances.PathOperator.Combine(
+                projectDirectoryPath,
+                _.GetServicesExtensionsDirectoryRelativePath());
 
             return output;
         }
@@ -211,6 +230,25 @@ namespace System
             var output = Instances.PathOperator.Combine(
                 projectDirectoryPath,
                 basesClassesDirectoryRelativePath);
+
+            return output;
+        }
+
+        public static string GetClassesDirectoryRelativePath(this IProjectPathsOperator _)
+        {
+            var output = Instances.PathOperator.Combine(
+                _.GetCodeDirectoryRelativePath(),
+                Instances.CodeDirectoryName.Classes());
+
+            return output;
+        }
+
+        public static string GetClassesDirectoryPath(this IProjectPathsOperator _,
+            string projectDirectoryPath)
+        {
+            var output = Instances.PathOperator.Combine(
+                projectDirectoryPath,
+                _.GetClassesDirectoryRelativePath());
 
             return output;
         }
