@@ -12,7 +12,7 @@ namespace System
         public static string GetSolutionDirectoryName(this ISolutionPathsOperator _,
             string solutionName)
         {
-            Instances.PathOperator.VerifyNoInvalidPathCharacters(solutionName);
+            Instances.PathOperator.Verify_NoInvalidPathCharacters(solutionName);
 
             // After checking, just use the project name as the project directory name.
             var output = solutionName;
@@ -57,7 +57,7 @@ namespace System
         public static string GetSolutionDirectoryPath(this ISolutionPathsOperator _,
             string solutionFilePath)
         {
-            var output = Instances.PathOperator.GetDirectoryPathOfFilePath(solutionFilePath);
+            var output = Instances.PathOperator.GetParentDirectoryPath_ForFile(solutionFilePath);
             return output;
         }
 
@@ -96,7 +96,7 @@ namespace System
         public static string GetSolutionName(this ISolutionPathsOperator _,
             string solutionFilePath)
         {
-            var solutionFileName = Instances.PathOperator.GetFileNameForFilePath(solutionFilePath);
+            var solutionFileName = Instances.PathOperator.GetFileName(solutionFilePath);
 
             var output = Instances.SolutionFileNameOperator.GetSolutionNameFromSolutionFileName(solutionFileName);
             return output;
