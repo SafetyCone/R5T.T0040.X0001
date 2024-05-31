@@ -36,7 +36,7 @@ namespace System
         public static string GetStandardDocumentationFilePath(this IProjectPathsOperator _,
             string projectDirectoryPath)
         {
-            var output = Instances.PathOperator.GetFilePath(
+            var output = Instances.PathOperator.Get_FilePath(
                 projectDirectoryPath,
                 _.GetStandardDocumentationFileRelativePath());
 
@@ -55,7 +55,7 @@ namespace System
         public static string GetStandardProgramFilePath(this IProjectPathsOperator _,
             string projectDirectoryPath)
         {
-            var output = Instances.PathOperator.GetFilePath(
+            var output = Instances.PathOperator.Get_FilePath(
                 projectDirectoryPath,
                 _.GetStandardProgramFileRelativePath());
 
@@ -75,7 +75,7 @@ namespace System
         {
             var servicesDirectoryRelativePath = _.GetServicesDirectoryRelativePath();
 
-            var servicesInterfacesDirectoryPath = Instances.PathOperator.GetDirectoryPath(
+            var servicesInterfacesDirectoryPath = Instances.PathOperator.Get_DirectoryPath(
                 servicesDirectoryRelativePath,
                 Instances.CodeDirectoryName.Interfaces());
 

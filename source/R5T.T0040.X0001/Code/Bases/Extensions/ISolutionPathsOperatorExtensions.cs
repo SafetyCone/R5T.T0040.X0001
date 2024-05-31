@@ -25,7 +25,7 @@ namespace System
         {
             var solutionDirectoryName = _.GetSolutionDirectoryName(solutionName);
 
-            var output = Instances.PathOperator.AppendDirectoryRelativePathToDirectoryPath(parentDirectoryPath, solutionDirectoryName);
+            var output = Instances.PathOperator.Append_DirectoryRelativePath_ToDirectoryPath(parentDirectoryPath, solutionDirectoryName);
             return output;
         }
 
@@ -35,7 +35,7 @@ namespace System
         public static string GetSourceSolutionDirectoryPath(this ISolutionPathsOperator _,
             string parentDirectoryPath)
         {
-            var output = Instances.PathOperator.AppendDirectoryRelativePathToDirectoryPath(
+            var output = Instances.PathOperator.Append_DirectoryRelativePath_ToDirectoryPath(
                 parentDirectoryPath,
                 Instances.CodeDirectoryName.Source());
 
@@ -50,14 +50,14 @@ namespace System
 
             var solutionFileName = Instances.SolutionFileNameOperator.GetSolutionFileName(solutionName);
 
-            var solutionFilePath = Instances.PathOperator.GetFilePath(sourceSolutionDirectoryPath, solutionFileName);
+            var solutionFilePath = Instances.PathOperator.Get_FilePath(sourceSolutionDirectoryPath, solutionFileName);
             return solutionFilePath;
         }
 
         public static string GetSolutionDirectoryPath(this ISolutionPathsOperator _,
             string solutionFilePath)
         {
-            var output = Instances.PathOperator.GetParentDirectoryPath_ForFile(solutionFilePath);
+            var output = Instances.PathOperator.Get_ParentDirectoryPath_ForFile(solutionFilePath);
             return output;
         }
 
@@ -67,20 +67,20 @@ namespace System
         {
             var solutionFileName = Instances.SolutionFileNameOperator.GetSolutionFileName(solutionName);
 
-            var output = Instances.PathOperator.GetFilePath(solutionDirectoryPath, solutionFileName);
+            var output = Instances.PathOperator.Get_FilePath(solutionDirectoryPath, solutionFileName);
             return output;
         }
 
         public static string GetSolutionFilePathForProject(this ISolutionPathsOperator _,
             string projectFilePath)
         {
-            var solutionFileExtension = Instances.FileExtension.Sln();
+            var solutionFileExtension = Instances.FileExtensions._Raw.sln;
 
             var path = projectFilePath;
 
-            while (Instances.PathOperator.HasParentDirectory(path))
+            while (Instances.PathOperator.Has_ParentDirectory(path))
             {
-                path = Instances.PathOperator.GetParentDirectoryPath(path);
+                path = Instances.PathOperator.Get_ParentDirectoryPath(path);
 
                 var hasSolutionFile = Instances.FileSystemOperator.HasFileInDirectoryByFileExtension(path, solutionFileExtension);
                 if (hasSolutionFile)
@@ -96,7 +96,7 @@ namespace System
         public static string GetSolutionName(this ISolutionPathsOperator _,
             string solutionFilePath)
         {
-            var solutionFileName = Instances.PathOperator.GetFileName(solutionFilePath);
+            var solutionFileName = Instances.PathOperator.Get_FileName(solutionFilePath);
 
             var output = Instances.SolutionFileNameOperator.GetSolutionNameFromSolutionFileName(solutionFileName);
             return output;

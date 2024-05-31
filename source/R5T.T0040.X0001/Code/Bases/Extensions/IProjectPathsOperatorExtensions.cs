@@ -12,7 +12,7 @@ namespace System
         public static string GetCodeDirectoryFileRelativePath(this IProjectPathsOperator _,
             string fileRelativePath)
         {
-            var output = Instances.PathOperator.GetFilePath(
+            var output = Instances.PathOperator.Get_FilePath(
                 _.GetCodeDirectoryRelativePath(),
                 fileRelativePath);
 
@@ -22,7 +22,7 @@ namespace System
         public static string GetCodeDirectoryPathFromProjectDirectoryPath(this IProjectPathsOperator _,
             string projectDirectoryPath)
         {
-            var output = Instances.PathOperator.GetDirectoryPath(
+            var output = Instances.PathOperator.Get_DirectoryPath(
                 projectDirectoryPath,
                 _.GetCodeDirectoryRelativePath());
 
@@ -34,7 +34,7 @@ namespace System
         {
             var projectDirectoryPath = _.GetProjectDirectoryPath(projectFilePath);
 
-            var codeDirectoryPath = Instances.PathOperator.GetDirectoryPath(
+            var codeDirectoryPath = Instances.PathOperator.Get_DirectoryPath(
                 projectDirectoryPath,
                 _.GetCodeDirectoryRelativePath());
 
@@ -101,7 +101,7 @@ namespace System
         {
             var codeDirectoryPath = _.GetCodeDirectoryPathFromProjectFilePath(projectFilePath);
 
-            var basesDirectoryPath = Instances.PathOperator.GetDirectoryPath(
+            var basesDirectoryPath = Instances.PathOperator.Get_DirectoryPath(
                 codeDirectoryPath,
                 Instances.CodeDirectoryName.Bases());
 
@@ -113,7 +113,7 @@ namespace System
         {
             var basesDirectoryPath = _.GetBasesDirectoryPath(projectFilePath);
 
-            var basesInterfacesDirectoryPath = Instances.PathOperator.GetDirectoryPath(
+            var basesInterfacesDirectoryPath = Instances.PathOperator.Get_DirectoryPath(
                 basesDirectoryPath,
                 Instances.CodeDirectoryName.Interfaces());
 
@@ -147,7 +147,7 @@ namespace System
         {
             var codeDirectoryPath = _.GetCodeDirectoryPathFromProjectFilePath(projectFilePath);
 
-            var interfacesDirectoryPath = Instances.PathOperator.GetDirectoryPath(
+            var interfacesDirectoryPath = Instances.PathOperator.Get_DirectoryPath(
                 codeDirectoryPath,
                 Instances.CodeDirectoryName.Interfaces());
 
